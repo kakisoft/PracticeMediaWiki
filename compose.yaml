@@ -1,0 +1,20 @@
+services:
+  mediawiki:
+    image: mediawiki
+    ports:
+      - 8080:80
+    environment:
+      - MEDIAWIKI_DB_HOST=db
+      - MEDIAWIKI_DB_USER=wikiuser
+      - MEDIAWIKI_DB_PASSWORD=secret
+      - MEDIAWIKI_DB_NAME=wikidb
+    depends_on:
+      - db
+
+  db:
+    image: mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=wikidb
+      - MYSQL_USER=wikiuser
+      - MYSQL_PASSWORD=secret
