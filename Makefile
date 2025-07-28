@@ -8,5 +8,5 @@ build:
 	docker compose build
 
 exec:
-	docker compose exec mediawiki bash
+	docker compose exec p-mediawiki bash
 
