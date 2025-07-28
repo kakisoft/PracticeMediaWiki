@@ -1,0 +1,22 @@
+services:
+  mediawiki:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    container_name: mediawiki
+    ports:
+      - "8080:80"
+    environment:
+      - MEDIAWIKI_DB_TYPE=mysql
+      - MEDIAWIKI_DB_HOST=host.docker.internal:3306
+      - MEDIAWIKI_DB_NAME=mediawiki
+      - MEDIAWIKI_DB_USER=wikiuser
+      - MEDIAWIKI_DB_PASSWORD=wikisecret
+    volumes:
+      - mediawiki_data:/var/www/html
+      - ./php.ini:/usr/local/etc/php/php.ini
+      - ./uploaded_files:/var/www/html/images
+    restart: always
+
+volumes:
+  mediawiki_data:

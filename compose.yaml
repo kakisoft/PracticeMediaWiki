@@ -1,20 +1,49 @@
 services:
   mediawiki:
-    image: mediawiki
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    container_name: p-mediawiki
     ports:
-      - 8080:80
+      - "8080:80"
     environment:
-      - MEDIAWIKI_DB_HOST=db
+      - MEDIAWIKI_DB_TYPE=mysql
+      - MEDIAWIKI_DB_HOST=mysql
+      - MEDIAWIKI_DB_NAME=mediawiki
       - MEDIAWIKI_DB_USER=wikiuser
-      - MEDIAWIKI_DB_PASSWORD=secret
-      - MEDIAWIKI_DB_NAME=wikidb
+      - MEDIAWIKI_DB_PASSWORD=wikisecret
+    volumes:
+      - ./php.ini:/usr/local/etc/php/php.ini
+      - ./uploaded_files:/var/www/html/images
+    restart: always
     depends_on:
-      - db
+      - mysql
+    networks:
+      - default
+      - shared-network-wiki
 
-  db:
-    image: mariadb
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=secret
-      - MYSQL_DATABASE=wikidb
+      - MYSQL_DATABASE=mediawiki
       - MYSQL_USER=wikiuser
-      - MYSQL_PASSWORD=secret
+      - MYSQL_PASSWORD=wikisecret
+      - MYSQL_ROOT_PASSWORD=rootpass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: always
+    networks:
+      - default
+      - shared-network-wiki
+
+volumes:
+  mediawiki_data:
+  mysql_data:
+
+networks:
+  default:
+  shared-network-wiki:
+    external: true
