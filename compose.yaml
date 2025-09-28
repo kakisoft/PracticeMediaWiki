@@ -14,7 +14,9 @@ services:
       - MEDIAWIKI_DB_PASSWORD=wikisecret
     volumes:
       - ./php.ini:/usr/local/etc/php/php.ini
-      - ./uploaded_files:/var/www/html/images
+      # - ./uploaded_files:/var/www/html/images
+      # - mediawiki_data:/var/www/html  # 名前付きボリューム
+      # - ./mediawiki_data:/var/www/html  # バインドマウント
     restart: always
     depends_on:
       - mysql

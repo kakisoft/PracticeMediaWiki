@@ -1,6 +1,7 @@
-FROM mediawiki:latest
-
-# updated package information 
+# FROM mediawiki:latest
+# FROM mediawiki:1.44.0
+FROM mediawiki:1.43.1
+# updated package information
 RUN apt-get update
 
 # install utils

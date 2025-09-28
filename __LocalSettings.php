@@ -21,8 +21,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 ## Uncomment this to disable output compression
 # $wgDisableOutputCompression = true;
 
-$wgSitename = "kakisoft-wiki-local";
-$wgMetaNamespace = "Kakisoft-wiki-local";
+$wgSitename = "Kakisoft-wiki";
 
 ## The URL base path to the directory containing the wiki;
 ## defaults for all runtime URL paths are based off of this.
@@ -41,7 +40,7 @@ $wgResourceBasePath = $wgScriptPath;
 ## or else you'll overwrite your logo when you upgrade!
 $wgLogos = [
 	'1x' => "$wgResourceBasePath/resources/assets/change-your-logo.svg",
-	'icon' => "$wgResourceBasePath/resources/assets/change-your-logo-icon.svg",
+	'icon' => "$wgResourceBasePath/resources/assets/change-your-logo.svg",
 ];
 
 ## UPO means: this is also a user preference option
@@ -75,12 +74,12 @@ $wgDBTableOptions = "ENGINE=InnoDB, DEFAULT CHARSET=binary";
 $wgSharedTables[] = "actor";
 
 ## Shared memory settings
-$wgMainCacheType = CACHE_NONE;
+$wgMainCacheType = CACHE_ACCEL;
 $wgMemCachedServers = [];
 
 ## To enable image uploads, make sure the 'images' directory
 ## is writable, then set this to true:
-$wgEnableUploads = false;
+$wgEnableUploads = true;
 $wgUseImageMagick = true;
 $wgImageMagickConvertCommand = "/usr/bin/convert";
 
@@ -103,14 +102,14 @@ $wgLocaltimezone = "UTC";
 ## be publicly accessible from the web.
 #$wgCacheDirectory = "$IP/cache";
 
-$wgSecretKey = "b23c24f271437994093983c96a3cbf4be3b5207a6472d52a74461a6e925f54de";
+$wgSecretKey = "7a2494afaf6e9d7801a8bfb7cc1e2c21baa32eb87e9b7a95c7bec00e902c5c1b";
 
 # Changing this will log out all existing sessions.
 $wgAuthenticationTokenVersion = "1";
 
 # Site upgrade key. Must be set to a string (default provided) to turn on the
 # web installer while LocalSettings.php is in place
-$wgUpgradeKey = "6f29807527c0cd64";
+$wgUpgradeKey = "7aaad1c488c39a6e";
 
 ## For attaching licensing metadata to pages, and displaying an
 ## appropriate copyright notice / icon. GNU Free Documentation
@@ -123,9 +122,14 @@ $wgRightsIcon = "";
 # Path to the GNU diff3 utility. Used for conflict resolution.
 $wgDiff3 = "/usr/bin/diff3";
 
+# The following permissions were set based on your choice in the installer
+$wgGroupPermissions["*"]["createaccount"] = false;
+$wgGroupPermissions["*"]["edit"] = false;
+$wgGroupPermissions["*"]["read"] = false;
+
 ## Default skin: you can change the default skin. Use the internal symbolic
 ## names, e.g. 'vector' or 'monobook':
-$wgDefaultSkin = "vector-2022";
+$wgDefaultSkin = "vector";
 
 # Enabled skins.
 # The following skins were automatically enabled:
@@ -135,6 +139,18 @@ wfLoadSkin( 'Timeless' );
 wfLoadSkin( 'Vector' );
 
 
+# Enabled extensions. Most of the extensions are enabled by adding
+# wfLoadExtension( 'ExtensionName' );
+# to LocalSettings.php. Check specific extension documentation for more details.
+# The following extensions were automatically enabled:
+wfLoadExtension( 'InputBox' );
+wfLoadExtension( 'Math' );
+wfLoadExtension( 'ParserFunctions' );
+
+// Sample
+wfLoadExtension( 'KakisoftPractice01' );
+
 # End of automatically generated settings.
 # Add more configuration options below.
 
+$wgShowExceptionDetails = true;
