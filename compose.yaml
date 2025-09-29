@@ -1,51 +1,50 @@
-services:
-  mediawiki:
-    build:
-      context: ./
-      dockerfile: ./Dockerfile
-    container_name: p-mediawiki
-    ports:
-      - "8080:80"
-    environment:
-      - MEDIAWIKI_DB_TYPE=mysql
-      - MEDIAWIKI_DB_HOST=mysql
-      - MEDIAWIKI_DB_NAME=mediawiki
-      - MEDIAWIKI_DB_USER=wikiuser
-      - MEDIAWIKI_DB_PASSWORD=wikisecret
-    volumes:
-      - ./php.ini:/usr/local/etc/php/php.ini
-      # - ./uploaded_files:/var/www/html/images
-      # - mediawiki_data:/var/www/html  # 名前付きボリューム
-      # - ./mediawiki_data:/var/www/html  # バインドマウント
-    restart: always
-    depends_on:
-      - mysql
-    networks:
-      - default
-      - shared-network-wiki
+  services:
+    mediawiki:
+      build:
+        context: ./
+        dockerfile: ./Dockerfile
+      container_name: p-mediawiki
+      ports:
+        - "8080:80"
+      environment:
+        - MEDIAWIKI_DB_TYPE=mysql
+        - MEDIAWIKI_DB_HOST=mysql
+        - MEDIAWIKI_DB_NAME=mediawiki
+        - MEDIAWIKI_DB_USER=wikiuser
+        - MEDIAWIKI_DB_PASSWORD=wikisecret
+      volumes:
+        - ./php.ini:/usr/local/etc/php/php.ini
+        - mediawiki_data:/var/www/html  # 名前付きボリューム
+        # - ./mediawiki_data:/var/www/html  # バインドマウント
+      restart: always
+      depends_on:
+        - mysql
+      networks:
+        - default
+        - shared-network-wiki
 
-  mysql:
-    image: mysql:8.0
-    container_name: mysql
-    environment:
-      - MYSQL_DATABASE=mediawiki
-      - MYSQL_USER=wikiuser
-      - MYSQL_PASSWORD=wikisecret
-      - MYSQL_ROOT_PASSWORD=rootpass
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
-    restart: always
-    networks:
-      - default
-      - shared-network-wiki
+    mysql:
+      image: mysql:8.0
+      container_name: mysql
+      environment:
+        - MYSQL_DATABASE=mediawiki
+        - MYSQL_USER=wikiuser
+        - MYSQL_PASSWORD=wikisecret
+        - MYSQL_ROOT_PASSWORD=rootpass
+      ports:
+        - "3306:3306"
+      volumes:
+        - mysql_data:/var/lib/mysql
+      restart: always
+      networks:
+        - default
+        - shared-network-wiki
 
-volumes:
-  mediawiki_data:
-  mysql_data:
+  volumes:
+    mediawiki_data:
+    mysql_data:
 
-networks:
-  default:
-  shared-network-wiki:
-    external: true
+  networks:
+    default:
+    shared-network-wiki:
+      external: true
