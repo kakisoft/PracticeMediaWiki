@@ -41,7 +41,7 @@ $wgResourceBasePath = $wgScriptPath;
 ## or else you'll overwrite your logo when you upgrade!
 $wgLogos = [
 	'1x' => "$wgResourceBasePath/resources/assets/change-your-logo.svg",
-	'icon' => "$wgResourceBasePath/resources/assets/change-your-logo-icon.svg",
+	'icon' => "$wgResourceBasePath/resources/assets/change-your-logo.svg",
 ];
 
 ## UPO means: this is also a user preference option
@@ -75,7 +75,7 @@ $wgDBTableOptions = "ENGINE=InnoDB, DEFAULT CHARSET=binary";
 $wgSharedTables[] = "actor";
 
 ## Shared memory settings
-$wgMainCacheType = CACHE_NONE;
+$wgMainCacheType = CACHE_ACCEL;
 $wgMemCachedServers = [];
 
 ## To enable image uploads, make sure the 'images' directory
@@ -103,14 +103,14 @@ $wgLocaltimezone = "UTC";
 ## be publicly accessible from the web.
 #$wgCacheDirectory = "$IP/cache";
 
-$wgSecretKey = "4a0ac937c7f2fc7fb9088c4aa6212c9fcf762182b151747497423b1ed3eb67dd";
+$wgSecretKey = "d211e9a6ca06e819aef7c7ea174eed8ad9145c7d194194d6c37f4b09a1e39bb6";
 
 # Changing this will log out all existing sessions.
 $wgAuthenticationTokenVersion = "1";
 
 # Site upgrade key. Must be set to a string (default provided) to turn on the
 # web installer while LocalSettings.php is in place
-$wgUpgradeKey = "9b5df54c0e91d59d";
+$wgUpgradeKey = "d0dcdbdc51ea0c12";
 
 ## For attaching licensing metadata to pages, and displaying an
 ## appropriate copyright notice / icon. GNU Free Documentation
@@ -123,8 +123,14 @@ $wgRightsIcon = "";
 # Path to the GNU diff3 utility. Used for conflict resolution.
 $wgDiff3 = "/usr/bin/diff3";
 
+# The following permissions were set based on your choice in the installer
+$wgGroupPermissions["*"]["createaccount"] = false;
+$wgGroupPermissions["*"]["edit"] = false;
+$wgGroupPermissions["*"]["read"] = false;
+
 ## Default skin: you can change the default skin. Use the internal symbolic
 ## names, e.g. 'vector' or 'monobook':
+// $wgDefaultSkin = "vector";
 $wgDefaultSkin = "vector-2022";
 
 # Enabled skins.
