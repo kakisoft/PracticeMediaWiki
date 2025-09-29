@@ -14,4 +14,8 @@ docker cp ./LocalSettings.php p-mediawiki:/var/www/html/LocalSettings.php
 docker cp ./logo02.png p-mediawiki:/var/www/html/images/logo.png
 ```
 
+## 削除
+```
+docker compose down --rmi all --volumes
+```
 
